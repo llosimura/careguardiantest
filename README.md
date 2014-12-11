@@ -15,6 +15,10 @@ Next, install angular-fullstack generator:
 
     npm install -g generator-angular-fullstack
 
+Also we will be using **bookshelf** ORM with **mysql** that requires knex installed globally
+
+    npm install -g knex
+
 Installing necessary dependencies
 -----------------------
 
@@ -23,7 +27,6 @@ To install  **nodejs** modules necessary to run the app we go to the project fol
     npm install
   
 To install  **bower** modules necessary to run the app we go to the project folder and we run
-		
 
     bower install
 	 
