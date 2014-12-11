@@ -8,7 +8,16 @@
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 var express = require('express');
+var bookshelf = require('bookshelf');
 var config = require('./config/environment');
+
+//Setup bookshelf ORM
+var db = bookshelf.initialize({client: 'mysql', connection: config.sqlite});
+bookshelf.db = db;
+
+// Load application models
+//require('./lib/models');
+
 // Setup server
 var app = express();
 var server = require('http').createServer(app);

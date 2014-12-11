@@ -3,10 +3,8 @@
 // Development specific configuration
 // ==================================
 module.exports = {
-  // MongoDB connection options
-  mongo: {
-    uri: 'mongodb://localhost/careguardiantest-dev'
-  },
-
-  seedDB: true
+  // SQLite connection options
+  sqlite: {
+    filename: './dev.sqlite3'
+  }
 };

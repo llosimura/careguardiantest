@@ -3,8 +3,8 @@
 // Test specific configuration
 // ===========================
 module.exports = {
-  // MongoDB connection options
-  mongo: {
-    uri: 'mongodb://localhost/careguardiantest-test'
+  // SQLite connection options
+  sqlite: {
+    filename: './dev.sqlite3'
   }
 };
