@@ -6,7 +6,6 @@ var _ = require('lodash');
 var Promise = require('bluebird');
 var url = require('url');
 module.exports = (function () {
-
   /**
    * We create a base controller that implements the basic CRUD opertations
    * Also we create a funcion that indexes all result and a method that handles
@@ -71,6 +70,7 @@ module.exports = (function () {
    */
   BaseController.prototype.add = function (req, res, next) {
     var _this = this;
+    console.log(req.body)
     this.model.forge(req.body)
       .save()
       .then(function(data) {
@@ -120,5 +120,5 @@ module.exports = (function () {
         res.json(err.toJSON());
       });
   };
-
+  return BaseController;
 })();

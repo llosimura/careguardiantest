@@ -9,14 +9,18 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 var express = require('express');
 var bookshelf = require('bookshelf');
+var path = require('path')
 var config = require('./config/environment');
 
 //Setup bookshelf ORM
-var db = bookshelf.initialize({client: 'mysql', connection: config.sqlite});
+var dbFile = path.join(__dirname, 'dev.sqlite3');
+var db = bookshelf.initialize({client: 'sqlite3', connection: {filename: dbFile} });
 bookshelf.db = db;
 
+console.log(dbFile)
+
 // Load application models
-//require('./lib/models');
+require('./models');
 
 // Setup server
 var app = express();
