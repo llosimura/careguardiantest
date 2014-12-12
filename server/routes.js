@@ -22,6 +22,13 @@ module.exports = function(app) {
   app.put('/api/caregivers/:id', controllers.caregivers.edit);
   app.delete('/api/caregivers/:id', controllers.caregivers.delete);
 
+  //Services
+  app.get('/api/services',controllers.services.index);
+  app.get('/api/services/:id', controllers.services.get);
+  app.post('/api/services', controllers.services.add);
+  app.put('/api/services/:id', controllers.services.edit);
+  app.delete('/api/services/:id', controllers.services.delete);
+
   //All other routes should redirect to the index.html
   app.route('/*')
     .get(function(req, res) {
