@@ -56,13 +56,17 @@
       <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
       <!-- endbower -->
     <!-- endbuild -->
-
+    <script src="bower_components/angular-ui-grid/ui-grid.min.js"></script>
+    <link rel="stylesheet" href="bower_components/angular-ui-grid/ui-grid.css">
         <!-- build:js({.tmp,client}) app/app.js -->
         <script src="app/app.js"></script>
           <!-- injector:js -->
+          <script src="app/caregivers/caregivers.controller.js"></script>
+          <script src="app/caregivers/caregivers.js"></script>
+          <script src="app/customers/customers.controller.js"></script>
+          <script src="app/customers/customers.js"></script>
           <script src="app/main/main.controller.js"></script>
           <script src="app/main/main.js"></script>
-          <script src="components/modal/modal.service.js"></script>
           <script src="components/navbar/navbar.controller.js"></script>
           <!-- endinjector -->
         <!-- endbuild -->

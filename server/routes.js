@@ -4,7 +4,6 @@
 
 'use strict';
 var _ = require('lodash');
-var errors = require('./components/errors');
 var controllers = require('./controllers');
 
 module.exports = function(app) {
@@ -19,18 +18,15 @@ module.exports = function(app) {
   // Insert routes below
   //app.use('/api/things', require('./api/thing'));
 
-  // All undefined asset or api routes should return a 404
-  //app.route('/:url(api|auth|components|app|bower_components|assets)/*')
-  // .get(errors[404]);
 
-  // All other routes should redirect to the index.html
-  //app.route('/*')
-  //  .get(function(req, res) {
-  //    res.sendfile(app.get('appPath') + '/index.html');
-  //  });
+  //All other routes should redirect to the index.html
+  app.route('/*')
+    .get(function(req, res) {
+      res.sendfile(app.get('appPath') + '/index.html');
+  });
 
   /**
-   * Capturing all errors produced
+   * Capturing all errors produced by the application
    */
   app.use(function(err, req, res, next) {
     res.json(err.get('status'), _.omit(err.toJSON(),['id','created_at','updated_at']));
