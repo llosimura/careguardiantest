@@ -2,6 +2,8 @@
 
 var path = require('path');
 var _ = require('lodash');
+var rootPath = path.normalize(__dirname + '/../../..');
+var dbFile = rootPath + '/server/dev.sqlite3';
 
 function requiredProcessEnv(name) {
   if(!process.env[name]) {
@@ -17,6 +19,9 @@ var all = {
 
   // Root path of server
   root: path.normalize(__dirname + '/../../..'),
+
+  // SQLite DB File
+  dbFile : dbFile,
 
   // Server port
   port: process.env.PORT || 9000,

@@ -3,7 +3,7 @@
  */
 
 'use strict';
-
+var _ = require('lodash');
 var errors = require('./components/errors');
 var controllers = require('./controllers');
 
@@ -28,4 +28,11 @@ module.exports = function(app) {
   //  .get(function(req, res) {
   //    res.sendfile(app.get('appPath') + '/index.html');
   //  });
+
+  /**
+   * Capturing all errors produced
+   */
+  app.use(function(err, req, res, next) {
+    res.json(err.get('status'), _.omit(err.toJSON(),['id','created_at','updated_at']));
+  });
 };

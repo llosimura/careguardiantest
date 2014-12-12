@@ -13,11 +13,8 @@ var path = require('path')
 var config = require('./config/environment');
 
 //Setup bookshelf ORM
-var dbFile = path.join(__dirname, 'dev.sqlite3');
-var db = bookshelf.initialize({client: 'sqlite3', connection: {filename: dbFile} });
+var db = bookshelf.initialize({client: 'sqlite3', connection: {filename: config.dbFile} });
 bookshelf.db = db;
-
-console.log(dbFile)
 
 // Load application models
 require('./models');

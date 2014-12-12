@@ -18,6 +18,7 @@ module.exports = (function () {
     this.add = _.bind(this.add, this);
     this.edit = _.bind(this.edit, this);
     this.delete = _.bind(this.delete, this);
+
   }
 
   /**
@@ -38,8 +39,7 @@ module.exports = (function () {
         res.json(data.toJSON());
       })
       .catch(function (err) {
-        //TODO work with error
-        res.json(err.toJSON());
+        _this.badRequestOrNotFound(err, next);
       });
   };
 
@@ -52,13 +52,12 @@ module.exports = (function () {
   BaseController.prototype.get = function (req,res, next){
     var _this = this;
     this.model.forge({id: req.params.id})
-      .fetch()
+      .fetch({require: true})
       .then(function(data) {
         res.json(data.toJSON());
       })
       .catch( function(err){
-        //TODO work with error
-        res.json(err.toJSON());
+        _this.badRequestOrNotFound(err, next);
       });
   };
 
@@ -70,15 +69,13 @@ module.exports = (function () {
    */
   BaseController.prototype.add = function (req, res, next) {
     var _this = this;
-    console.log(req.body)
     this.model.forge(req.body)
       .save()
       .then(function(data) {
         res.json(data.toJSON());
       })
       .catch( function(err){
-        //TODO work with error
-        res.json(err.toJSON());
+        _this.badRequestOrNotFound(err, next);
     });
   };
 
@@ -96,9 +93,8 @@ module.exports = (function () {
       .then(function(data) {
         res.json(data.toJSON());
       })
-      .catch( function(err){
-        //TODO work with error
-        res.json(err.toJSON());
+      .catch(function(err){
+        _this.badRequestOrNotFound(err, next);
     });
   };
 
@@ -116,9 +112,40 @@ module.exports = (function () {
         res.json(data.toJSON());
       })
       .catch( function(err){
-        //TODO work with error
-        res.json(err.toJSON());
+        _this.badRequestOrNotFound(err, next);
       });
   };
+
+  /**
+   * Handle the error of badRequestOrNotFound
+   * @param err
+   * @param next
+   */
+  BaseController.prototype.badRequestOrNotFound = function (err, next){
+    if (err.message === "EmptyResponse")
+      this.getError(4041,next);
+    else
+      this.getError(4001,next);
+  };
+
+  /**
+   * Getting the custom error from DB
+   * @param err
+   * @param next
+   */
+  BaseController.prototype.getError = function (err, next){
+    Bookshelf.models.Error.Model.forge({code: err})
+      .fetch({require: true})
+      .then(function(data) {
+        next(data);
+      })
+      .catch(function (err){
+        next(Bookshelf.models.Error.Model.forge({code: 5001, status: 500, message: "Connection failure"}));
+    });
+  };
+
+  BaseController.prototype.model = Bookshelf.models.BaseModel.Model;
+  BaseController.prototype.collection = Bookshelf.models.BaseModel.Collection;
+
   return BaseController;
 })();
