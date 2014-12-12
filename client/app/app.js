@@ -8,6 +8,7 @@ angular.module('careguardiantestApp', [
   'ui.bootstrap',
   'ui.grid'
 ])
+  .constant('API_URL','http://localhost:9000/api/')
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     $urlRouterProvider
       .otherwise('/');

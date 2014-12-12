@@ -6,14 +6,6 @@ angular.module('careguardiantestApp')
       {
         'title': 'Services',
         'link': '/'
-      },
-      {
-        'title': 'Caregivers',
-        'link': '/caregivers'
-      },
-      {
-        'title': 'Customers',
-        'link': '/customers'
       }
     ];
     $scope.isCollapsed = true;
