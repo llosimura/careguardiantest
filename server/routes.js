@@ -15,9 +15,12 @@ module.exports = function(app) {
   app.put('/api/users/:id', controllers.users.edit);
   app.delete('/api/users/:id', controllers.users.delete);
 
-  // Insert routes below
-  //app.use('/api/things', require('./api/thing'));
-
+  //Caregivers
+  app.get('/api/caregivers',controllers.caregivers.index);
+  app.get('/api/caregivers/:id', controllers.caregivers.get);
+  app.post('/api/caregivers', controllers.caregivers.add);
+  app.put('/api/caregivers/:id', controllers.caregivers.edit);
+  app.delete('/api/caregivers/:id', controllers.caregivers.delete);
 
   //All other routes should redirect to the index.html
   app.route('/*')

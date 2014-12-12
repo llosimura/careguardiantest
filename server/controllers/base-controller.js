@@ -39,6 +39,8 @@ module.exports = (function () {
         res.json(data.toJSON());
       })
       .catch(function (err) {
+
+        console.log(err);
         _this.badRequestOrNotFound(err, next);
       });
   };
